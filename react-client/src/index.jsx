@@ -1,35 +1,35 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import $ from 'jquery';
+import axios from 'axios';
 import List from './components/List.jsx';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { 
-      items: []
+    this.state = {
+      podcasts: []
     }
   }
 
   componentDidMount() {
-    $.ajax({
-      url: '/items', 
-      success: (data) => {
-        this.setState({
-          items: data
-        })
-      },
-      error: (err) => {
-        console.log('err', err);
-      }
-    });
+    axios.get('/podcasts').then((response) => {
+      console.log(response);
+      // this.setState({
+      //   podcasts: data,
+      // });
+    }).catch(err => {
+      console.log(err);
+    })
   }
 
   render () {
-    return (<div>
-      <h1>Item List</h1>
-      <List items={this.state.items}/>
-    </div>)
+    const { podcasts } = this.state;
+    return (
+      <div>
+        <h1>Item List</h1>
+        <List podcasts={podcasts}/>
+      </div>
+    )
   }
 }
 

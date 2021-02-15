@@ -1,8 +1,8 @@
 import React from 'react';
 
-const ListItem = (props) => (
+const ListItem = ({ podcast }) => (
   <div>
-    { props.item.description }
+    { podcast.name }
   </div>
 )
 
