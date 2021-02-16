@@ -4,7 +4,7 @@ var DIST_DIR = path.join(__dirname, '/react-client/dist');
 
 module.exports = {
   mode: 'development',
-  devtool: 'eval-cheap-source-map',
+  devtool: 'eval-source-map',
   entry: `${SRC_DIR}/index.jsx`,
   output: {
     filename: 'bundle.js',
