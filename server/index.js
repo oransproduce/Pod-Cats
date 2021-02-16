@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const compression = require('compression');
-const { selectAll, searchByTerm, findById } = require('../database');
+const { selectAll, searchByTerm, findById, insertReview } = require('../database');
 
 const app = express();
 
@@ -23,7 +23,6 @@ app.get('/podcasts', (req, res) => {
 app.get('/podcasts/:id', (req, res) => {
   const { id } = req.params;
   findById(id, (err, podcast) => {
-    console.log(podcast);
     if (err) {
       res.sendStatus(500);
     } else {
@@ -31,6 +30,17 @@ app.get('/podcasts/:id', (req, res) => {
     }
   });
 });
+
+app.post('/podcasts/:id/review', (req, res) => {
+  const { id } = req.params;
+  insertReview(id, req.body, (err, result) => {
+    if (err) {
+      res.sendStatus(500);
+    } else {
+      res.sendStatus(200);
+    }
+  })
+})
 
 app.get('/search/:searchTerm', (req, res) => {
   const { searchTerm } = req.params;
@@ -42,6 +52,7 @@ app.get('/search/:searchTerm', (req, res) => {
     }
   });
 });
+
 
 app.listen(3000, function() {
   console.log('listening on port 3000!');

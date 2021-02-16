@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function PodcastDetail({pod}) {
+export default function PodcastDetail({ pod, postReview }) {
   const [episodeCount, updateEpisodeCount] = useState(5);
   const [showModal, updateShowModal] = useState(false);
   const classes = useStyles();
@@ -88,7 +88,7 @@ export default function PodcastDetail({pod}) {
           {rvs}
         </Grid>
       </Grid>
-      <AddReviewModal showModal={showModal} updateShowModal={updateShowModal} />
+      <AddReviewModal postReview={postReview} showModal={showModal} updateShowModal={updateShowModal} />
     </Container>
   );
 };

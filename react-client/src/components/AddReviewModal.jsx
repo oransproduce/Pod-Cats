@@ -13,18 +13,30 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-export default function FormDialog({showModal, updateShowModal}) {
+export default function FormDialog({ showModal, updateShowModal, postReview }) {
 
   const classes = useStyles();
 
   let [value, changeValue] = useState('');
   let [rating, changeRating] = useState(2.5);
-  const [hover, setHover] = React.useState(-1);
+  const [hover, setHover] = useState(-1);
 
   const handleChange = (e) => {
     const { target } = e;
     changeValue(target.value);
   }
+
+  const handleSubmit = (e) => {
+    updateShowModal(false);
+    const review = {
+      body: value,
+      rating,
+    };
+    postReview(review);
+    changeValue('');
+    changeRating('');
+  }
+
   return (
     <div className={classes.root}>
       <Dialog maxWidth="xs" fullWidth open={showModal} onClose={() => updateShowModal(false)} aria-labelledby="form-dialog-title">
@@ -72,7 +84,7 @@ export default function FormDialog({showModal, updateShowModal}) {
           <Button onClick={() => updateShowModal(false)} color="primary">
             Cancel
           </Button>
-          <Button onClick={() => updateShowModal(false)} color="primary">
+          <Button onClick={handleSubmit} color="primary">
             Submit
           </Button>
         </DialogActions>

@@ -41,13 +41,25 @@ const App = (props) => {
     }, 350);
   }, [searchTerm]);
 
-  const imageClick = (id) => {
+  const getById = (id) => {
     axios.get(`/podcasts/${id}`).then(({data}) => {
       updatePodDetail(data);
+      updateItemDetail(true);
     }).catch(err => {
       console.log(err);
     });
-    updateItemDetail(true);
+  }
+  const imageClick = (id) => {
+    getById(id);
+  }
+  const postReview = (review) => {
+    const id = podDetail._id;
+    review.username = 'remy';
+    axios.post(`/podcasts/${id}/review`, review).then(() => {
+      getById(id);
+    }).catch(err => {
+      console.log(err);
+    });
   }
 
   let mainView;
@@ -55,7 +67,7 @@ const App = (props) => {
     mainView = (
       <div>
         <TopBar updateItemDetail={updateItemDetail} updateSearch={updateSearch} />
-        <PodcastDetail pod={podDetail} />
+        <PodcastDetail postReview={postReview} pod={podDetail} />
       </div>
     );
   } else {

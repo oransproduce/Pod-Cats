@@ -65,7 +65,6 @@ const selectAll = (cb) => {
 const searchByTerm = (searchTerm, cb) => {
   searchTerm = searchTerm.toLowerCase();
   const reg = new RegExp(searchTerm);
-  console.log(searchTerm);
   Podcast.find({name_lower: reg}).then(podcasts => {
     cb(null, podcasts);
   }).catch(err => {
@@ -74,11 +73,23 @@ const searchByTerm = (searchTerm, cb) => {
 }
 
 const findById = (id, cb) => {
-  console.log(id);
   Podcast.findById(id).then(podcast => {
     cb(null, podcast);
   }).catch(err => {
     cb(err);
+  });
+}
+
+const insertReview = (id, review, cb) => {
+  Podcast.findById(id).then(podcast => {
+    podcast.reviews.push(review);
+    podcast.save().then(result => {
+      cb(null, result);
+    }).catch(err => {
+      cb(err);
+    })
+  }).catch(err => {
+      cb(err);
   });
 }
 
@@ -87,4 +98,5 @@ module.exports = {
   Podcast,
   searchByTerm,
   findById,
+  insertReview,
 }
