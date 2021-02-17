@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Paper, Grid, Typography, Container, Link } from '@material-ui/core';
+import { Paper, Grid, Typography, Container, Link, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 import Reviews from './Reviews';
@@ -19,8 +19,8 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   imgSmall: {
-    width: '100%',
-    height: '100%',
+    width: 'auto',
+    maxHeight: 'auto',
     [theme.breakpoints.up('md')]: {
       display: 'none'
     },
@@ -65,9 +65,11 @@ export default function PodcastDetail({ pod, postReview }) {
               </Grid>
             </Grid>
             <Grid item xs={12} md={8}>
-              <Grid container direction="column">
+              <Grid container direction="column" spacing={1} justify="space-between">
                 <Grid item xs={12}>
-                  <img className={classes.imgSmall} src={pod.art600} />
+                  <Grid container justify="center">
+                    <img className={classes.imgSmall} src={pod.art600} />
+                  </Grid>
                 </Grid>
                 <Grid className={classes.descriptionSmall} item xs={12}>
                   <Typography dangerouslySetInnerHTML={{__html: pod.description}} variant="body1" />

@@ -18,7 +18,7 @@ export default function Review ({ review }) {
   return (
     <Grid item xs={12} sm={6} md={4}>
       <Card className={classes.card}>
-        <Grid container justify="space-between" spacing={1} direction="column">
+        <Grid container justify="space-between" spacing={3} direction="column">
           <Grid item xs={12}>
             <Rating size="small" precision={0.1} value={review.rating} readOnly/>
           </Grid>
