@@ -1,6 +1,6 @@
 # Pod-Cats
 
-> This is a web application inspired by goodreads.com for users to browse and find highly rated podcasts. 
+> This is a web application for users to browse and find highly rated podcasts. 
 
 ## Table of Contents
 1. [Motivation](#Demo)
@@ -18,27 +18,22 @@
 ## Tech
 * Front End
   * React
-  * Styled Components
+  * Material UI
   * Webpack
-  * Enzyme
-  * Jest
 * Backend
   * MongoDB
   * Express
-  * Docker
-  * AWS EC2
 
 ## Features
 * Mobile first UI built using Material UI and React consists of podcast search and browsing, item detail page with full episode content
-* Guest Input menu for users to specify number and age of people in party
-* Pricing feature outputs nightly rental price as well as additional fees to user 
+* Debounced live search to query database for podcast information
+* User Review modal on item detail page allows users to see ratings and add their own 
 
 ## Usage
 
 > To run webpack, change webpack config mode to development or production according to needs then run
   npm run react-dev
-> To start local server run npm start
-> To seed database run npm run seed
+> To start local server, npm start
 
 ## Requirements
 
@@ -46,8 +41,6 @@ An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 
 - Node 6.13.0
 - etc
-
-## Development
 
 ### Installing Dependencies
 
