@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/podcats', {
+const url = process.env.CONNECTIONSTRING || 'mongodb://localhost:27017/podcats';
+mongoose.connect(url, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });

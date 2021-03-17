@@ -3,7 +3,7 @@ const faker = require('faker');
 let Parser = require('rss-parser');
 const { Podcast } = require('./index.js');
 
-let searchTerms = ['daily+news', 'eating', 'food', 'travel'];
+const searchTerms = ['daily+news', 'eating', 'food', 'travel', 'nba', 'basketball', 'this+american+life', 'the+new+york+times', 'npr', 'culture', 'politics', 'finance', 'biology', 'economics', 'artificial+intelligence', 'art', 'design', 'fashion'];
 let parser = new Parser();
 let podDocument;
 for (let searchTerm of searchTerms) {
