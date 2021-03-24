@@ -9,12 +9,12 @@
 1. [Features](#Features)
 1. [Usage](#Usage)
 1. [Requirements](#requirements)
-1. [Development](#development)
+1. [Installing Dependencies](#installing)
 
 ## Motivation
 > I am an avid podcast listener and find that they enrich my life as a source of entertainment and news on subjects I'm interested in like politics or the NBA. While I frequent sites like Pitchfork to find good music, Rotten Tomatoes to find good movies, and Goodreads to find good books, I've been dissatisfied with the current offering of similar sites for podcasts that don't require you to create a spotify account. I decided to build a web application that allows users to find highly reviewed podcasts. 
 ## Demo
-![Pod-Cats Demo](https://remy-sdc-images.s3-us-west-2.amazonaws.com/final_605b76876accc7004453c1dc_75128.gif)
+![Pod-Cats Demo](https://remy-sdc-images.s3-us-west-2.amazonaws.com/final_605b77f2da095f0069920491_890738.gif)
 
 ## Tech
 * Front End
