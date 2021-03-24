@@ -9,7 +9,7 @@
 1. [Features](#Features)
 1. [Usage](#Usage)
 1. [Requirements](#requirements)
-1. [Installing Dependencies](#installing)
+1. [Installing Dependencies](#installing-dependencies)
 
 ## Motivation
 > I am an avid podcast listener and find that they enrich my life as a source of entertainment and news on subjects I'm interested in like politics or the NBA. While I frequent sites like Pitchfork to find good music, Rotten Tomatoes to find good movies, and Goodreads to find good books, I've been dissatisfied with the current offering of similar sites for podcasts that don't require you to create a spotify account. I decided to build a web application that allows users to find highly reviewed podcasts. 
