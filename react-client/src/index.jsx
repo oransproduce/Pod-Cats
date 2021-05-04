@@ -33,24 +33,21 @@ const App = (props) => {
     }
     clearTimeout(debounce);
     debounce = setTimeout(() => {
-      axios.get(`/search/${searchTerm}`).then(({ data }) => {
+      axios.get(`/podcasts/search/${searchTerm}`).then(({ data }) => {
         updatePodcasts(data);
       }).catch(err => {
         console.log(err);
       });
-    }, 350);
+    }, 200);
   }, [searchTerm]);
 
-  const getById = (id) => {
+  const imageClick = (id) => {
     axios.get(`/podcasts/${id}`).then(({data}) => {
       updatePodDetail(data);
       updateItemDetail(true);
     }).catch(err => {
       console.log(err);
     });
-  }
-  const imageClick = (id) => {
-    getById(id);
   }
   const postReview = (review) => {
     const id = podDetail._id;
@@ -62,23 +59,21 @@ const App = (props) => {
     });
   }
 
-  let mainView;
   if (itemDetail) {
-    mainView = (
+    return (
       <div>
         <TopBar updateItemDetail={updateItemDetail} updateSearch={updateSearch} />
         <PodcastDetail postReview={postReview} pod={podDetail} />
       </div>
     );
-  } else {
-    mainView = (
-      <div>
-        <TopBar updateItemDetail={updateItemDetail} updateSearch={updateSearch} />
-        <PodcastList imageClick={imageClick} searchTerm={searchTerm} podcasts={podcasts}/>
-      </div>
-    );
   }
-  return mainView;
+  return (
+    <div>
+      <TopBar updateItemDetail={updateItemDetail} updateSearch={updateSearch} />
+      <PodcastList imageClick={imageClick} searchTerm={searchTerm} podcasts={podcasts}/>
+    </div>
+  );
+
 }
 
 ReactDOM.render(<App />, document.getElementById('app'));
