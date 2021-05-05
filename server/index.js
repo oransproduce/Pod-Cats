@@ -12,10 +12,15 @@ const app = express();
 app.use(compression());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-// app.use(cookieParser());
-// app.use(session({
-//   storage: MongoStore.create({ mongoUrl: 'mongodb://localhost/podcats' })
-// }))
+// app.use(cookieParser({
+//   secret: 'test',
+// }));
+app.use(
+  session({
+    storage: MongoStore.create({ mongoUrl: 'mongodb://localhost/sessions' }),
+    secret: 'test',
+  })
+)
 
 app.use(express.static(__dirname + '/../react-client/dist'));
 
