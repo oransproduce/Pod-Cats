@@ -2,11 +2,10 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const compression = require('compression');
 const podcastController = require('./controllers/podcasts.js');
+
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
-
-const { selectAll, searchByTerm, findById, insertReview } = require('../database');
 
 const app = express();
 

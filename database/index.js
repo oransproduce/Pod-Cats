@@ -6,7 +6,7 @@ mongoose.connect(url, {
   useUnifiedTopology: true
 });
 
-var db = mongoose.connection;
+const db = mongoose.connection;
 
 db.on('error', function() {
   console.log('mongoose connection error');
@@ -16,7 +16,7 @@ db.once('open', function() {
   console.log('mongoose connected successfully');
 });
 
-var podcastSchema = mongoose.Schema({
+const podcastSchema = mongoose.Schema({
   author: String,
   author_lower: String,
   name: {
@@ -52,8 +52,17 @@ var podcastSchema = mongoose.Schema({
   ],
 });
 
-var Podcast = mongoose.model('Podcast', podcastSchema);
+const Podcast = mongoose.model('Podcast', podcastSchema);
+
+const userSchema = mongoose.Schema({
+  password: String,
+  salt: String,
+});
+
+const Users = mongoose.model('User', userSchema);
+
 
 module.exports = {
   Podcast,
+  Users,
 };
