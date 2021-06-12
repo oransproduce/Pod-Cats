@@ -64,20 +64,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function TopBar({ updateSearch, updateItemDetail }) {
+export default function TopBar({ setSearchTerm, setItemDetail }) {
   const classes = useStyles();
   const [searchValue, updateValue] = useState('');
 
   const handleChange = (e) => {
     const { target } = e;
     updateValue(target.value);
-    updateSearch(searchValue);
+    setSearchTerm(searchValue);
   }
 
   const handleKeyPress = (e) => {
     const { key } = e;
     if (key === 'Enter') {
-      updateSearch(searchValue);
+      setSearchTerm(searchValue);
       updateValue('');
     }
   }
@@ -94,7 +94,7 @@ export default function TopBar({ updateSearch, updateItemDetail }) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography onClick={() => updateItemDetail(false)} className={classes.title} variant="h3" noWrap>
+          <Typography onClick={() => setItemDetail(false)} className={classes.title} variant="h3" noWrap>
             Pod-cats
           </Typography>
           <div className={classes.search}>

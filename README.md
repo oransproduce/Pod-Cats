@@ -26,7 +26,7 @@
   * Express
 
 ## Features
-* Mobile first UI built using Material UI and React consists of podcast search and browsing, item detail page with full episode content
+* Mobile first UI built using Material UI and React consists of podcast search and browsing, item detail page with full episode content s
 * Debounced live search to query database for podcast information
 * User Review modal on item detail page allows users to see ratings and add their own 
 
