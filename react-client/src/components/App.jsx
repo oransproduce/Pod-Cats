@@ -9,7 +9,7 @@ import PodcastDetail from './PodcastDetail';
 import searchPodcasts from '../utils/searchPodcasts';
 
 export default function App({ searchTerm, itemDetail, setItemDetail }) {
-
+  const auth = useAuth();
   const [podcasts, setPodcasts] = useState([]);
   const [podDetail, setPodDetail] = useState({});
 
