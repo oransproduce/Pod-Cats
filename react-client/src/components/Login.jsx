@@ -1,10 +1,21 @@
 import React, { useState } from 'react';
-import { Box } from '@material-ui/core';
+import { Box, Grid, Container, Paper, TextField, Button } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import { useHistory, useLocation } from 'react-router-dom';
 import { useAuth } from '../hooks/auth';
 
-export default function Login() {
+const useStyles = makeStyles((theme) => ({
+  root: {
+    height: '100vh',
+  },
+  paper: {
+    height: '100%',
+    width: '100%',
+  }
+}));
 
+export default function Login() {
+  const { root, paper } = useStyles();
   const auth = useAuth();
   const history = useHistory();
   const location = useLocation();
@@ -31,18 +42,42 @@ export default function Login() {
   };
 
   return (
-    <Box mt={10}>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Username
-          <input name="username" value={username} onChange={handleChange} />
-        </label>
-        <label>
-          Password
-          <input name="password" type="password" value={password} onChange={handleChange} />
-        </label>
-        <button type="submit">Submit</button>
-      </form>
-    </Box>
+    <Container maxWidth="lg">
+      <Grid className={root} justify="center" container>
+        <Grid container direction="column" justify="center" item xs={6}>
+          <Grid id="testing" item xs={7}>
+            <Paper className={paper}>
+              <form onSubmit={handleSubmit}>
+                <Grid container justify="space-around" direction="column">
+                  <Grid item xs={12}>
+                    <TextField
+                      name="username"
+                      label="Username"
+                      value={username}
+                      onChange={handleChange}
+                      fullWidth
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      name="password"
+                      label="Password"
+                      value={password}
+                      onChange={handleChange}
+                      fullWidth
+                      type="password"
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Button type="submit">Submit</Button>
+                  </Grid>
+                </Grid>
+
+              </form>
+            </Paper>
+          </Grid>
+        </Grid>
+    </Grid>
+    </Container>
   );
 }
