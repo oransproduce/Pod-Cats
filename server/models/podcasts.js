@@ -1,4 +1,4 @@
-const { Podcast }  = require('../../database');
+const { Podcast }  = require('../../database/models');
 
 const selectAll = (cb) => {
   Podcast.find().select('name author description art600').limit(50).exec((err, podcasts) => {

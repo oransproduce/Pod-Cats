@@ -7,6 +7,7 @@ import InputBase from '@material-ui/core/InputBase';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
+import NavMenu from './NavMenu.jsx';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -67,6 +68,11 @@ const useStyles = makeStyles((theme) => ({
 export default function TopBar({ setSearchTerm, setItemDetail }) {
   const classes = useStyles();
   const [searchValue, updateValue] = useState('');
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
 
   const handleChange = (e) => {
     const { target } = e;
@@ -91,8 +97,10 @@ export default function TopBar({ setSearchTerm, setItemDetail }) {
             className={classes.menuButton}
             color="inherit"
             aria-label="open drawer"
+            onClick={handleClick}
           >
             <MenuIcon />
+            <NavMenu anchorEl={anchorEl} setAnchorEl={setAnchorEl} />
           </IconButton>
           <Typography onClick={() => setItemDetail(false)} className={classes.title} variant="h3" noWrap>
             Pod-cats

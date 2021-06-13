@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link, Route } from 'react-router-dom';
 import axios from 'axios';
 
 import TopBar from './TopBar';
@@ -7,11 +8,9 @@ import PodcastDetail from './PodcastDetail';
 
 import searchPodcasts from '../utils/searchPodcasts';
 
-export default function App(props) {
+export default function App({ searchTerm, itemDetail, setItemDetail }) {
 
   const [podcasts, setPodcasts] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [itemDetail, setItemDetail] = useState(false);
   const [podDetail, setPodDetail] = useState({});
 
   const getDefault = () => {
@@ -69,7 +68,6 @@ export default function App(props) {
 
   return (
     <>
-      <TopBar setItemDetail={setItemDetail} setSearchTerm={setSearchTerm} />
       {renderPageContents()}
     </>
   );
