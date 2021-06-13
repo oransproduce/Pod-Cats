@@ -28,8 +28,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Reviews ({reviews, updateShowModal}) {
   const classes = useStyles();
-  const averageRating = reviews.map(review => review.rating).reduce((a, b) => a + b)/reviews.length;
-  console.log(averageRating);
+  const averageRating = reviews.map((review) => review.rating).reduce((a, b) => a + b)/reviews.length;
   return (
     <div className={classes.root}>
       <Divider className={classes.divider} light />
@@ -51,7 +50,7 @@ export default function Reviews ({reviews, updateShowModal}) {
         <Typography variant="h5">{'out of 5'}</Typography>
       </Toolbar>
       <Grid container spacing={3}>
-        {reviews.map(review => <Review review={review} key={review.username}/>)}
+        {reviews.map((review, i) => <Review review={review} key={review.username + i}/>)}
       </Grid>
     </div>
   );
