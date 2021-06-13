@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { Box } from '@material-ui/core';
 import { useAuth } from '../hooks/auth';
@@ -6,6 +7,8 @@ import { useAuth } from '../hooks/auth';
 export default function Signup() {
 
   const auth = useAuth();
+  const history = useHistory();
+  const location = useLocation();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 

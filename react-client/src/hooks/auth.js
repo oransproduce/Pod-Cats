@@ -16,10 +16,11 @@ export const useProvideAuth = () => {
       console.log('Login did not succeed, try again');
     });
   }
-  const logout = (cb=() => {}) => {
+  const logout = () => {
     axios.delete('/auth/logout').then(() => {
       setUser(null);
-      cb();
+    }).catch((err) => {
+      console.log(err);
     })
   }
   const signup = (username, password, cb = () => {}) => {
@@ -27,13 +28,13 @@ export const useProvideAuth = () => {
       setUser(data);
       cb();
     }).catch((err) => {
-      console.log('Signup failed');
+      console.log(err);
     });
   }
-  const loggedin = (cb = () => {}) => {
+  const loggedin = () => {
     axios.get('/auth/loggedIn').then(({ data }) => {
+      console.log(data);
       setUser(data);
-      cb();
     }).catch((err) => {
       console.log(err);
     });

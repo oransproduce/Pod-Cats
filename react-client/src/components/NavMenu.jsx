@@ -40,7 +40,7 @@ export default function NavMenu({ anchorEl, setAnchorEl }) {
           </Link>
         </MenuItem>
         <MenuItem onClick={handleClose}>
-          <Button onClick={auth.logout}>
+          <Button disabled={!auth.user} onClick={auth.logout}>
           Logout
           </Button>
         </MenuItem>

@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Reviews ({reviews, updateShowModal}) {
   const classes = useStyles();
-  const averageRating = reviews.reduce((a, b) => a.rating + b.rating)/reviews.length;
+  const averageRating = reviews.map((review) => review.rating).reduce((a, b) => a + b)/reviews.length;
   return (
     <div className={classes.root}>
       <Divider className={classes.divider} light />

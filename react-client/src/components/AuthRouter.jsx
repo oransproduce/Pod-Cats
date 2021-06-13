@@ -1,34 +1,37 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Route, Switch, BrowserRouter, Link } from 'react-router-dom';
+
 import TopBar from './TopBar';
-import App from './App';
+import Main from './Main';
 import Login from './Login';
 import Signup from './Signup';
-import ProvideAuth from './ProvideAuth';
+import ProtectedRoute from './ProtectedRoute';
+
+import { useAuth } from '../hooks/auth';
 
 export default function AuthRouter() {
   const [searchTerm, setSearchTerm] = useState('');
   const [itemDetail, setItemDetail] = useState(false);
+  const { loggedin } = useAuth();
+  useEffect(loggedin, []);
   return (
-    <ProvideAuth>
-      <BrowserRouter>
-        <TopBar setItemDetail={setItemDetail} setSearchTerm={setSearchTerm} />
-        <Switch>
-          <Route exact path="/">
-            <App
-              searchTerm={searchTerm}
-              itemDetail={itemDetail}
-              setItemDetail={setItemDetail}
-            />
-          </Route>
-          <Route path="/login">
-            <Login />
-          </Route>
-          <Route path="/signup">
-            <Signup />
-          </Route>
-        </Switch>
-      </BrowserRouter>
-    </ProvideAuth>
+    <BrowserRouter>
+      <TopBar setItemDetail={setItemDetail} setSearchTerm={setSearchTerm} />
+      <Switch>
+        <ProtectedRoute exact path="/">
+          <Main
+            searchTerm={searchTerm}
+            itemDetail={itemDetail}
+            setItemDetail={setItemDetail}
+          />
+        </ProtectedRoute>
+        <Route path="/login">
+          <Login />
+        </Route>
+        <Route path="/signup">
+          <Signup />
+        </Route>
+      </Switch>
+    </BrowserRouter>
   );
 }
