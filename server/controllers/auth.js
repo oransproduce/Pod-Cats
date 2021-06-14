@@ -25,10 +25,9 @@ router.post('/login', async (req, res) => {
   const { username, password } = req.body;
   try {
     const user = await getUser(username);
-    if (user && compareHash(password, user.password, user.salt)) {
+    if (compareHash(password, user.password, user.salt)) {
       const sessionizedUser = sessionizeUser(user);
       req.session.user = sessionizedUser;
-      console.log(req.sessionID);
       res.status(200).send(sessionizedUser);
     } else {
       throw new Error("passwords didn't match");

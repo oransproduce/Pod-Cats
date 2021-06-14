@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, Route } from 'react-router-dom';
+import { Link, Route, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../hooks/auth';
 
@@ -9,10 +9,11 @@ import PodcastDetail from './PodcastDetail';
 
 import searchPodcasts from '../utils/searchPodcasts';
 
-export default function Main({ searchTerm, itemDetail, setItemDetail }) {
+export default function Main({ searchTerm }) {
   const { user, loggedin } = useAuth();
+  const history = useHistory();
   const [podcasts, setPodcasts] = useState([]);
-  const [podDetail, setPodDetail] = useState({});
+
 
   const getDefault = () => {
     axios.get('/podcasts').then(({ data }) => {
@@ -33,44 +34,13 @@ export default function Main({ searchTerm, itemDetail, setItemDetail }) {
 
   const imageClick = (id) => {
     axios.get(`/podcasts/${id}`).then(({ data }) => {
-      setPodDetail(data);
-      setItemDetail(true);
+      history.push({ pathname: `/${data.name}` });
     }).catch(err => {
       console.log(err);
     });
   };
-
-  const getById = (id) => {
-    axios.get(`/podcasts/${id}`).then(({data}) => {
-      setPodDetail(data);
-      setItemDetail(true);
-    }).catch(err => {
-      console.log(err);
-    });
-  }
-
-  const postReview = (review) => {
-    const id = podDetail._id;
-    review.username = user.username;
-    axios.post(`/podcasts/${id}/review`, review).then(() => {
-      getById(id);
-    }).catch(err => {
-      console.log(err);
-    });
-  };
-
-  const renderPageContents = () => (
-    itemDetail ? (
-      <PodcastDetail postReview={postReview} pod={podDetail} />
-    ) : (
-      <PodcastList imageClick={imageClick} searchTerm={searchTerm} podcasts={podcasts}/>
-    )
-  );
 
   return (
-    <>
-      {renderPageContents()}
-    </>
+    <PodcastList imageClick={imageClick} searchTerm={searchTerm} podcasts={podcasts} />
   );
-
 }

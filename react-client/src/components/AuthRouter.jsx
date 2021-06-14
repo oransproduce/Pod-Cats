@@ -1,28 +1,40 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Switch, BrowserRouter, Link } from 'react-router-dom';
+import { CircularProgress, Box } from '@material-ui/core';
+import axios from 'axios';
 
 import TopBar from './TopBar';
 import Main from './Main';
 import Login from './Login';
 import Signup from './Signup';
 import ProtectedRoute from './ProtectedRoute';
+import PodcastDetail from './PodcastDetail';
 
 import { useAuth } from '../hooks/auth';
 
 export default function AuthRouter() {
+
   const [searchTerm, setSearchTerm] = useState('');
-  const [itemDetail, setItemDetail] = useState(false);
-  const { loggedin } = useAuth();
+
+  const { loggedin, loading } = useAuth();
+
   useEffect(loggedin, []);
+
+  if (loading) {
+    return (
+      <Box height="100vh" display="flex" justifyContent="center" alignItems="center">
+        <CircularProgress />
+      </Box>
+    );
+  }
+
   return (
     <BrowserRouter>
-      <TopBar setItemDetail={setItemDetail} setSearchTerm={setSearchTerm} />
+      <TopBar setSearchTerm={setSearchTerm} />
       <Switch>
         <ProtectedRoute exact path="/">
           <Main
             searchTerm={searchTerm}
-            itemDetail={itemDetail}
-            setItemDetail={setItemDetail}
           />
         </ProtectedRoute>
         <Route path="/login">
@@ -30,6 +42,9 @@ export default function AuthRouter() {
         </Route>
         <Route path="/signup">
           <Signup />
+        </Route>
+        <Route path="/:podname">
+          <PodcastDetail />
         </Route>
       </Switch>
     </BrowserRouter>

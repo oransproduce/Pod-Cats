@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -65,8 +66,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function TopBar({ setSearchTerm, setItemDetail }) {
+export default function TopBar({ setSearchTerm }) {
   const classes = useStyles();
+  const history = useHistory();
   const [searchValue, updateValue] = useState('');
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -88,6 +90,10 @@ export default function TopBar({ setSearchTerm, setItemDetail }) {
     }
   }
 
+  const logoClick = (e) => {
+    history.push({ pathname: '/' })
+  }
+
   return (
     <div className={classes.root}>
       <AppBar position="fixed">
@@ -102,7 +108,7 @@ export default function TopBar({ setSearchTerm, setItemDetail }) {
             <MenuIcon />
             <NavMenu anchorEl={anchorEl} setAnchorEl={setAnchorEl} />
           </IconButton>
-          <Typography onClick={() => setItemDetail(false)} className={classes.title} variant="h3" noWrap>
+          <Typography onClick={logoClick} className={classes.title} variant="h3" noWrap>
             Pod-cats
           </Typography>
           <div className={classes.search}>

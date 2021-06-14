@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
-import { Paper, Grid, Typography, Container, Link, Box } from '@material-ui/core';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { Paper, Grid, Typography, Container, Link, Box, Fab, CircularProgress } from '@material-ui/core';
+import { FavoriteIcon } from '@material-ui/icons'
 import { makeStyles } from '@material-ui/core/styles';
+import axios from 'axios'
 
 import Reviews from './Reviews';
 import EpisodeList from './EpisodeList';
@@ -41,13 +44,50 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function PodcastDetail({ pod, postReview }) {
+export default function PodcastDetail() {
   const [episodeCount, updateEpisodeCount] = useState(5);
   const [showModal, updateShowModal] = useState(false);
+  const [pod, setPod] = useState(null);
   const classes = useStyles();
+  const { podname } = useParams();
 
-  const eps = Object.keys(pod).length > 0 ? <EpisodeList episodeCount={episodeCount} episodes={pod.episodes} /> : <></>;
-  const rvs = Object.keys(pod).length > 0 ? <Reviews reviews={pod.reviews} updateShowModal={updateShowModal} /> : <></>;
+  const getByName = (name) => {
+    axios.get(`/podcasts/name/${name}`).then(({data}) => {
+      setPod(data);
+    }).catch(err => {
+      console.log(err);
+    });
+  };
+
+  const getById = (id) => {
+    axios.get(`/podcasts/${id}`).then(({data}) => {
+      setPod(data);
+    }).catch(err => {
+      console.log(err);
+    });
+  }
+
+  const postReview = (review) => {
+    const id = pod._id;
+    review.username = user.username;
+    axios.post(`/podcasts/${id}/review`, review).then(() => {
+      getById(id);
+    }).catch(err => {
+      console.log(err);
+    });
+  };
+
+  useEffect(() => {
+    getByName(podname);
+  }, []);
+
+  if (!pod) {
+    return (
+      <Box height="100vh" display="flex" justifyContent="center" alignItems="center">
+        <CircularProgress />
+      </Box>
+    );
+  }
 
   return (
     <Container className={classes.root} maxWidth="lg">
@@ -75,7 +115,7 @@ export default function PodcastDetail({ pod, postReview }) {
                   <Typography dangerouslySetInnerHTML={{__html: pod.description}} variant="body1" />
                 </Grid>
                 <Grid item xs={12}>
-                  {eps}
+                  <EpisodeList episodeCount={episodeCount} episodes={pod.episodes} />
                 </Grid>
                 <Grid item xs={12}>
                   <Grid justify="center" container>
@@ -87,10 +127,10 @@ export default function PodcastDetail({ pod, postReview }) {
           </Grid>
         </Grid>
         <Grid item xs={12}>
-          {rvs}
+          <Reviews reviews={pod.reviews} updateShowModal={updateShowModal} />
         </Grid>
       </Grid>
       <AddReviewModal postReview={postReview} showModal={showModal} updateShowModal={updateShowModal} />
     </Container>
   );
-};
+}

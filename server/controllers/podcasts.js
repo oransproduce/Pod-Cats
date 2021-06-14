@@ -1,5 +1,5 @@
 const express = require('express');
-const { selectAll, findById, insertReview, searchByTerm } = require('../models/podcasts.js');
+const { selectAll, findById, insertReview, searchByTerm, findByName } = require('../models/podcasts.js');
 
 const router = express.Router();
 
@@ -9,6 +9,17 @@ router.get('/', (req, res) => {
       res.sendStatus(500);
     } else {
       res.status(200).json(data);
+    }
+  });
+});
+
+router.get('/name/:name', (req, res) => {
+  const { name } = req.params;
+  findByName(name, (err, podcast) => {
+    if (err) {
+      res.sendStatus(500);
+    } else {
+      res.status(200).send(podcast);
     }
   });
 });
@@ -23,6 +34,8 @@ router.get('/:id', (req, res) => {
     }
   });
 });
+
+
 
 router.get('/search/:searchTerm', (req, res) => {
   const { searchTerm } = req.params;

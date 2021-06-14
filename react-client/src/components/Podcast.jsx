@@ -1,5 +1,6 @@
 import React from 'react';
-import { Paper, Grid, Typography } from '@material-ui/core';
+import { Paper, Grid, Typography, Fab } from '@material-ui/core';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
@@ -30,10 +31,17 @@ const Podcast = ({ pod, imageClick }) => {
           </Grid>
           <Grid item xs={8}>
             <Grid container direction="column" spacing={2} justify="space-between">
-              <Grid item xs={12}>
-                <Typography color="textPrimary" variant="h5">
-                  {pod.name}
-                </Typography>
+              <Grid container item xs={12} justify="space-between">
+                <Grid item>
+                  <Typography color="textPrimary" variant="h5">
+                    {pod.name}
+                  </Typography>
+                </Grid>
+                <Grid item>
+                  <Fab aria-label="like">
+                    <FavoriteIcon />
+                  </Fab>
+                </Grid>
               </Grid>
               <Grid item xs={12}>
                 <Typography color="textSecondary" variant="h6">
@@ -48,6 +56,7 @@ const Podcast = ({ pod, imageClick }) => {
         </Grid>
       </Paper>
     </Grid>
+
   );
 }
 

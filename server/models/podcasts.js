@@ -28,6 +28,14 @@ const findById = (id, cb) => {
   });
 }
 
+const findByName = (name, cb) => {
+  Podcast.find({ name }).then((podcasts) => {
+    cb(null, podcasts[0]);
+  }).catch((err) => {
+    cb(err);
+  });
+}
+
 const insertReview = (id, review, cb) => {
   Podcast.findById(id).then(podcast => {
     podcast.reviews.push(review);
@@ -46,4 +54,5 @@ module.exports = {
   searchByTerm,
   findById,
   insertReview,
+  findByName,
 };
