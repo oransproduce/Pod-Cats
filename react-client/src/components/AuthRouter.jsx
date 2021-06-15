@@ -10,7 +10,7 @@ import Signup from './Signup';
 import ProtectedRoute from './ProtectedRoute';
 import PodcastDetail from './PodcastDetail';
 
-import { useAuth } from '../hooks/auth';
+import useAuth from '../hooks/useAuth';
 
 export default function AuthRouter() {
 

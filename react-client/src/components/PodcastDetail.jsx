@@ -119,7 +119,11 @@ export default function PodcastDetail() {
                 </Grid>
                 <Grid item xs={12}>
                   <Grid justify="center" container>
-                    <Link onClick={() => updateEpisodeCount(episodeCount + 5)} className={classes.link}>Show more Episodes...</Link>
+                    <Link onClick={() => updateEpisodeCount(episodeCount + 5)} className={classes.link}>
+                      <Typography>
+                        Show more Episodes...
+                      </Typography>
+                    </Link>
                   </Grid>
                 </Grid>
               </Grid>

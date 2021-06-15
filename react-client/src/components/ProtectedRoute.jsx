@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { useAuth } from '../hooks/auth';
+import useAuth from '../hooks/useAuth';
 
 export default function ProtectedRoute({ children, ...rest }) {
   const auth = useAuth();

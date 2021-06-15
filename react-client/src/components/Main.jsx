@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, Route, useHistory } from 'react-router-dom';
 import axios from 'axios';
-import { useAuth } from '../hooks/auth';
+import useAuth from '../hooks/useAuth';
 
 import TopBar from './TopBar';
 import PodcastList from './PodcastList';

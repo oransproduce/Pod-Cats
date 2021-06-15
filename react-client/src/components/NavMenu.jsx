@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Menu, MenuItem } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import { useAuth } from '../hooks/auth';
+import useAuth from '../hooks/useAuth';
 
 export default function NavMenu({ anchorEl, setAnchorEl }) {
   const auth = useAuth();

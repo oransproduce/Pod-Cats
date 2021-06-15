@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Box, Grid, Container, Paper, TextField, Button, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory, useLocation } from 'react-router-dom';
-import { useAuth } from '../hooks/auth';
+import useAuth from '../hooks/useAuth';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,6 +25,8 @@ export default function AuthForm({ title, submitFunction }) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    console.log(name);
+    console.log(value);
     if (name === 'username') {
       setUsername(value);
     } else {
@@ -49,7 +51,7 @@ export default function AuthForm({ title, submitFunction }) {
             <Box flex={1}/>
             <Box flex={1.5}>
               <Paper className={verticalFlex}>
-                <form className={verticalFlex} onSubmit={handleSubmit}>
+                <form data-testid="auth-form" className={verticalFlex} onSubmit={handleSubmit}>
                   <Box
                     className={verticalFlex}
                     display="flex"
@@ -68,6 +70,8 @@ export default function AuthForm({ title, submitFunction }) {
                         value={username}
                         onChange={handleChange}
                         fullWidth
+                        data-testid="username-field"
+                        required
                       />
                     </Box>
                     <Box px={3}>
@@ -78,6 +82,8 @@ export default function AuthForm({ title, submitFunction }) {
                         onChange={handleChange}
                         fullWidth
                         type="password"
+                        data-testid="password-field"
+                        required
                       />
                     </Box>
                     <Box mx="auto">
